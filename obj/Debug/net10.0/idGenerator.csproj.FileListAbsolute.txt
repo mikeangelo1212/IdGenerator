@@ -1,0 +1,14 @@
+C:\Users\delarubIT\Documents\Programacion\C#\IdGenerator\bin\Debug\net10.0\idGenerator.exe
+C:\Users\delarubIT\Documents\Programacion\C#\IdGenerator\bin\Debug\net10.0\idGenerator.deps.json
+C:\Users\delarubIT\Documents\Programacion\C#\IdGenerator\bin\Debug\net10.0\idGenerator.runtimeconfig.json
+C:\Users\delarubIT\Documents\Programacion\C#\IdGenerator\bin\Debug\net10.0\idGenerator.dll
+C:\Users\delarubIT\Documents\Programacion\C#\IdGenerator\bin\Debug\net10.0\idGenerator.pdb
+C:\Users\delarubIT\Documents\Programacion\C#\IdGenerator\obj\Debug\net10.0\idGenerator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\delarubIT\Documents\Programacion\C#\IdGenerator\obj\Debug\net10.0\idGenerator.AssemblyInfoInputs.cache
+C:\Users\delarubIT\Documents\Programacion\C#\IdGenerator\obj\Debug\net10.0\idGenerator.AssemblyInfo.cs
+C:\Users\delarubIT\Documents\Programacion\C#\IdGenerator\obj\Debug\net10.0\idGenerator.csproj.CoreCompileInputs.cache
+C:\Users\delarubIT\Documents\Programacion\C#\IdGenerator\obj\Debug\net10.0\idGenerator.dll
+C:\Users\delarubIT\Documents\Programacion\C#\IdGenerator\obj\Debug\net10.0\refint\idGenerator.dll
+C:\Users\delarubIT\Documents\Programacion\C#\IdGenerator\obj\Debug\net10.0\idGenerator.pdb
+C:\Users\delarubIT\Documents\Programacion\C#\IdGenerator\obj\Debug\net10.0\idGenerator.genruntimeconfig.cache
+C:\Users\delarubIT\Documents\Programacion\C#\IdGenerator\obj\Debug\net10.0\ref\idGenerator.dll
