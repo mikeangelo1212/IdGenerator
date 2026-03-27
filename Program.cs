@@ -1,13 +1,16 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using System.Reflection.Metadata;
-using QuestPDF;
+using QuestPDF.Companion;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
 
+QuestPDF.Settings.License = LicenseType.Community;
 
-Document.Create(container =>
+var document = Document.Create(container =>
 {
     container.Page(page =>
     {
-        page.Size(PageSizes.A4);
+        page.Size(PageSizes.Letter);
         page.Margin(2, Unit.Centimetre);
         page.PageColor(Colors.White);
         page.DefaultTextStyle(x => x.FontSize(20));
@@ -34,5 +37,8 @@ Document.Create(container =>
                 x.CurrentPageNumber();
             });
     });
-})
-.GeneratePdf("hello.pdf");
+});
+
+document.GeneratePdf("hello.pdf");
+
+document.ShowInCompanion(12500);
