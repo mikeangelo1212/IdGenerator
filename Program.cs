@@ -1,41 +1,60 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using System.Net.ServerSentEvents;
+using System.Security.Cryptography.X509Certificates;
 using QuestPDF.Companion;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 
 QuestPDF.Settings.License = LicenseType.Community;
+QuestPDF.Settings.EnableCaching = true;
 
 var document = Document.Create(container =>
-{
+{   
+    PageSize _pageSize=PageSizes.Letter;
     container.Page(page =>
-    {
-        page.Size(PageSizes.Letter);
-        page.Margin(2, Unit.Centimetre);
+    {   
+        page.Size(_pageSize);
+        // page.Margin(2, Unit.Centimetre);
         page.PageColor(Colors.White);
         page.DefaultTextStyle(x => x.FontSize(20));
         
-        page.Header()
-            .Text("Hello PDF!")
-            .SemiBold().FontSize(36).FontColor(Colors.Blue.Medium);
+        // page.Header()
+        //     .Text("hola")
+        //     .SemiBold().FontSize(36).FontColor(Colors.Blue.Medium);
         
         page.Content()
-            .PaddingVertical(1, Unit.Centimetre)
+            .Width(_pageSize.Width)
+            .Height(_pageSize.Height)
+            .Padding(0)
             .Column(x =>
             {
-                x.Spacing(20);
+                x.Item()
+                .Height(PageSizes.Letter.Height)
+                .Width(PageSizes.Letter.Width)
+                .Layers(layers =>
+                {   
+                    //layers.Layer().Image("src/img/plantilla.png").FitUnproportionally();
+                    layers.PrimaryLayer().Column(
+                        column =>
+                        {
+                            column.Spacing(20);
+                            column.Item().Text(Placeholders.LoremIpsum());
+                            column.Item().Image(Placeholders.Image(200, 100));
+                        }
+                    );
+                });
                 
-                x.Item().Text(Placeholders.LoremIpsum());
-                x.Item().Image(Placeholders.Image(200, 100));
+                
             });
         
-        page.Footer()
-            .AlignCenter()
-            .Text(x =>
-            {
-                x.Span("Page ");
-                x.CurrentPageNumber();
-            });
+        // page.Footer()
+        //     .AlignCenter()
+        //     .Text(x =>
+        //     {
+        //         x.Span("Page ");
+        //         x.CurrentPageNumber();
+        //     });
     });
 });
 
