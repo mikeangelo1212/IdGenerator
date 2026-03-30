@@ -11,4 +11,12 @@
     <PackageReference Include="QuestPDF" Version="2026.2.4" />
   </ItemGroup>
 
+
+<ItemGroup>
+  <Content Include="src\csv\**\*.csv">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </Content>
+</ItemGroup>
+
+
 </Project>

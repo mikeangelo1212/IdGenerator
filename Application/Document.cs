@@ -36,7 +36,7 @@ public static class CreateId
                     .Padding(0)
                     .Layers(x =>
                     {   
-                        x.Layer().Image("src/img/plantilla.png").FitUnproportionally();
+                        x.Layer().Image("../src/img/plantilla.png").FitUnproportionally();
                         x.PrimaryLayer().Column(column =>
                         {
                             column.Item().Height(_pageSize.Height/6);

@@ -7,11 +7,31 @@ using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using Application;
+using Microsoft.VisualBasic.FileIO;
 
-CreateId.Initialize();
+// CreateId.Initialize();
 
-QuestPDF.Fluent.Document document = CreateId.CreateDocument();
+// QuestPDF.Fluent.Document document = CreateId.CreateDocument();
 
-document.GeneratePdf("hello.pdf");
+// document.GeneratePdf("hello.pdf");
 
-document.ShowInCompanion(12500);
+// document.ShowInCompanion(12500);
+
+string basePath = AppContext.BaseDirectory;
+string filePath = Path.Combine(basePath, "src", "csv", "test.csv");
+
+using (TextFieldParser parser = new TextFieldParser(filePath))
+
+{
+    parser.TextFieldType = FieldType.Delimited;
+    parser.SetDelimiters(",");
+    while (!parser.EndOfData) 
+    {
+        //Processing row
+        string[] fields = parser.ReadFields()!;
+        foreach (string field in fields) 
+        {
+            Console.WriteLine(field);
+        }
+    }
+}

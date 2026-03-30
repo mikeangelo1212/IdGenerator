@@ -57,3 +57,4 @@ C:\Users\delarubIT\Documents\Programacion\C#\IdGenerator\bin\Debug\net10.0\runti
 C:\Users\delarubIT\Documents\Programacion\C#\IdGenerator\bin\Debug\net10.0\runtimes\win-x86\native\qpdf.dll
 C:\Users\delarubIT\Documents\Programacion\C#\IdGenerator\bin\Debug\net10.0\runtimes\win-x86\native\zlib1.dll
 C:\Users\delarubIT\Documents\Programacion\C#\IdGenerator\obj\Debug\net10.0\idGenera.F806E899.Up2Date
+C:\Users\delarubIT\Documents\Programacion\C#\IdGenerator\bin\Debug\net10.0\src\csv\test.csv
