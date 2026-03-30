@@ -27,26 +27,17 @@ var document = Document.Create(container =>
             .Width(_pageSize.Width)
             .Height(_pageSize.Height)
             .Padding(0)
-            .Column(x =>
-            {
-                x.Item()
-                .Height(PageSizes.Letter.Height)
-                .Width(PageSizes.Letter.Width)
-                .Layers(layers =>
-                {   
-                    //layers.Layer().Image("src/img/plantilla.png").FitUnproportionally();
-                    layers.PrimaryLayer().Column(
-                        column =>
-                        {
-                            column.Spacing(20);
-                            column.Item().Text(Placeholders.LoremIpsum());
-                            column.Item().Image(Placeholders.Image(200, 100));
-                        }
-                    );
+            .Layers(x =>
+            {   
+                x.Layer().Image("src/img/plantilla.png").FitUnproportionally();
+                x.PrimaryLayer().Column(column =>
+                {
+                    column.Spacing(20);
+                    column.Item().Text(Placeholders.LoremIpsum());
+                    column.Item().Image(Placeholders.Image(200, 100));
                 });
-                
-                
             });
+                
         
         // page.Footer()
         //     .AlignCenter()
