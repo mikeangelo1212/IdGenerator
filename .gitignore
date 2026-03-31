@@ -1,2 +1,3 @@
 src/img/*
-bin/
+bin/*
+obj/Debug/net10.0/*
