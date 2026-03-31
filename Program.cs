@@ -8,30 +8,20 @@ using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using Application;
 using Microsoft.VisualBasic.FileIO;
+using System;
+using System.IO;
+using System.Collections;
 
 // CreateId.Initialize();
 
 // QuestPDF.Fluent.Document document = CreateId.CreateDocument();
 
-// document.GeneratePdf("hello.pdf");
+// document.GeneratgitePdf("hello.pdf");
 
 // document.ShowInCompanion(12500);
 
-string basePath = AppContext.BaseDirectory;
-string filePath = Path.Combine(basePath, "src", "csv", "test.csv");
+const string PATH="src/csv";
 
-using (TextFieldParser parser = new TextFieldParser(filePath))
+Console.WriteLine(Directory.Exists(PATH));
+CsvHandler.ListFiles("src/csv");
 
-{
-    parser.TextFieldType = FieldType.Delimited;
-    parser.SetDelimiters(",");
-    while (!parser.EndOfData) 
-    {
-        //Processing row
-        string[] fields = parser.ReadFields()!;
-        foreach (string field in fields) 
-        {
-            Console.WriteLine(field);
-        }
-    }
-}
