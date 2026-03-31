@@ -23,5 +23,5 @@ using System.Collections;
 const string PATH="src/csv";
 
 Console.WriteLine(Directory.Exists(PATH));
-CsvHandler.ListFiles("src/csv");
+Console.WriteLine($"Respuesta del metodo handler: {CsvHandler.ListFiles("src/csv")}");
 
