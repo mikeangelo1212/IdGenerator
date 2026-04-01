@@ -15,7 +15,7 @@ public static class CsvHandler
         bool flag = true;
         int option=0;
         
-        while (flag)
+        do
         {
             Console.WriteLine($"==========Files in directory==========");
             for (int i = 0; i < files.Length; i++)
@@ -36,25 +36,24 @@ public static class CsvHandler
             {
                 Console.WriteLine("==========Please select a file==========");
                 option = Convert.ToInt32(Console.ReadLine());
+                if (option >= files.Length)
+                {
+                    Console.WriteLine("==========Option out of range==========");
+                }
             }
-            catch
+            catch(Exception e)
             {
-                Console.WriteLine("==========Invalid Input==========");
+                Console.WriteLine($"==========Invalid Input==========\n{e}");
                 continue;
             }
 
-            if (option > files.Length)
-            {
-                Console.WriteLine("==========Option out of range==========");
-            }
-            else
-            {
-                Console.WriteLine($"File is found by FileExists?: {File.Exists(files[option])}");
-                Console.WriteLine($"{files[option]} selected");
-                flag=false;
 
-            }
-        }
+            Console.WriteLine($"File is found by FileExists?: {File.Exists(files[option])}");
+            Console.WriteLine($"{files[option]} selected");
+            flag=false;
+
+            
+        }while (flag);
         return files[option];
     }
 

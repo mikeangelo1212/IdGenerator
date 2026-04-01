@@ -11,6 +11,7 @@ using Microsoft.VisualBasic.FileIO;
 using System;
 using System.IO;
 using System.Collections;
+using System.Timers;
 
 // CreateId.Initialize();
 
@@ -21,7 +22,38 @@ using System.Collections;
 // document.ShowInCompanion(12500);
 
 const string PATH="src/csv";
+const string IMAGE_PATH="src/img";
 
 Console.WriteLine(Directory.Exists(PATH));
-Console.WriteLine($"Respuesta del metodo handler: {CsvHandler.ListFiles("src/csv")}");
+CreateId.SearchImages(IMAGE_PATH);
+// string[,] csvFull=CsvHandler.LoadCsv(CsvHandler.ListFiles("src/csv"));
+
+// Console.WriteLine(csvFull.Length);
+//el arreglo es [y,x]   [0,0],[0,1],[0,2],[0,3],[0,2],
+//                      [1,0],[1,1],[1,2],[1,3],[1,4]
+// GetLength(1, son las columnas)
+// GetLength(0, son las filas)
+
+// bool flag=true;
+// int option;
+// do
+// {
+//     Console.WriteLine("==========CSV Columns==========\n");
+//     for (int i = 0; i < csvFull.GetLength(1); i++)
+//     {
+//         Console.WriteLine($"Column <{i}>: {csvFull[0,i]}");
+//     }
+//     try
+//     {
+//         Console.WriteLine("==========Select a column==========");
+//         option = Convert.ToInt32(Console.ReadLine());
+//     }
+//     catch (Exception e)
+//     {
+//         Console.WriteLine($"==========Invalid Input==========\n{e}");
+//         continue;
+//     }
+//     flag=false;
+// }while (flag);
+
 

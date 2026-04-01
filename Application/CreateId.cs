@@ -13,6 +13,57 @@ public static class CreateId
         QuestPDF.Settings.EnableCaching = true;
     }
 
+    public static void SearchImages(string path)
+    {
+        List<string> files= Directory.GetFiles(path).ToList();
+        bool flag = true;
+        int option=0;
+        
+        do
+        {   string[] allowedExtensions={"png", "jpg"};
+            Console.WriteLine($"==========Array going in==========");
+            foreach (var file in files)
+            {
+                System.Console.WriteLine(file);
+            }
+            Console.WriteLine($"==========Images in directory (png,jpg)==========");
+            foreach (var file in files)
+            {
+                if (!allowedExtensions.Contains(file.Substring(file.Length - 3))){
+                    files.Remove(file);
+                }
+            }
+            Console.WriteLine($"==========Cleaned array==========");
+            foreach (var file in files)
+            {
+                System.Console.WriteLine(file);
+            }
+
+            
+            
+            // try
+            // {
+            //     Console.WriteLine("==========Please select a file==========");
+            //     option = Convert.ToInt32(Console.ReadLine());
+            //     if (option >= files.Length)
+            //     {
+            //         Console.WriteLine("==========Option out of range==========");
+            //     }
+            // }
+            // catch(Exception e)
+            // {
+            //     Console.WriteLine($"==========Invalid Input==========\n{e}");
+            //     continue;
+            // }
+
+            //     Console.WriteLine($"File is found by FileExists?: {File.Exists(files[option])}");
+            //     Console.WriteLine($"{files[option]} selected");
+            //     flag=false;
+
+            Console.ReadLine();
+        }while (flag);
+
+    }
     public static Document CreateDocument()
     {
         return Document.Create(container =>
