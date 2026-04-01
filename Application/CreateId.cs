@@ -27,6 +27,10 @@ public static class CreateId
                 System.Console.WriteLine(file);
             }
             Console.WriteLine($"==========Images in directory (png,jpg)==========");
+            for (int i = 0; i < files.Count; i++)
+            {
+                
+            }
             foreach (var file in files)
             {
                 if (!allowedExtensions.Contains(file.Substring(file.Length - 3))){
