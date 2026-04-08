@@ -21,11 +21,20 @@ using System.Timers;
 
 // document.ShowInCompanion(12500);
 
-const string PATH="src/csv";
+const string CSV_PATH="src/csv";
 const string IMAGE_PATH="src/img";
 
-Console.WriteLine(Directory.Exists(PATH));
-CreateId.SearchImages(IMAGE_PATH);
+Console.WriteLine(Directory.Exists(CSV_PATH));
+Console.WriteLine(Directory.Exists(IMAGE_PATH));
+List<string>? imagesUrl= CreateId.SearchImages(IMAGE_PATH);
+
+if(imagesUrl is null)
+{
+    Console.WriteLine("==========Image path non existent==========");
+    Console.ReadKey();
+    Environment.Exit(0);
+}
+
 // string[,] csvFull=CsvHandler.LoadCsv(CsvHandler.ListFiles("src/csv"));
 
 // Console.WriteLine(csvFull.Length);

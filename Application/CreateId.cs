@@ -13,59 +13,45 @@ public static class CreateId
         QuestPDF.Settings.EnableCaching = true;
     }
 
-    public static void SearchImages(string path)
+    public static List<string>? SearchImages(string path)
     {
         List<string> files= Directory.GetFiles(path).ToList();
-        bool flag = true;
-        int option=0;
-        
-        do
-        {   string[] allowedExtensions={"png", "jpg"};
-            Console.WriteLine($"==========Array going in==========");
-            foreach (var file in files)
-            {
-                System.Console.WriteLine(file);
+        if(files is null)
+        {
+            return null;
+        }
+        string[] allowedExtensions={"png", "jpg"};
+        // Console.WriteLine($"==========Array going in==========");
+        // foreach (var file in files)
+        // {
+        //     System.Console.WriteLine(file);
+        // }
+        Console.WriteLine($"==========Images in directory (png,jpg)==========");
+        for (int i = 0; i < files.Count; i++)
+        {
+            if (!allowedExtensions.Contains(files[i].Substring(files[i].Length - 3))){
+                files.RemoveAt(i);
             }
-            Console.WriteLine($"==========Images in directory (png,jpg)==========");
-            for (int i = 0; i < files.Count; i++)
-            {
-                
-            }
-            foreach (var file in files)
-            {
-                if (!allowedExtensions.Contains(file.Substring(file.Length - 3))){
-                    files.Remove(file);
+            else
+            {   
+                char[] fileChars=files[i].ToCharArray();
+                for (int j = 0; j < fileChars.Length; j++)
+                {
+                    if (fileChars[j] == '\\')
+                    {
+                        fileChars[j] = '/';
+                    }
                 }
+                files[i]= new string(fileChars);
             }
-            Console.WriteLine($"==========Cleaned array==========");
-            foreach (var file in files)
-            {
-                System.Console.WriteLine(file);
-            }
+        }
+        for (int i = 0; i < files.Count; i++)
+        {
+            string padding= i%2==0?"\n":"   ";
+            Console.Write($"{files[i]}{padding}");
+        }
 
-            
-            
-            // try
-            // {
-            //     Console.WriteLine("==========Please select a file==========");
-            //     option = Convert.ToInt32(Console.ReadLine());
-            //     if (option >= files.Length)
-            //     {
-            //         Console.WriteLine("==========Option out of range==========");
-            //     }
-            // }
-            // catch(Exception e)
-            // {
-            //     Console.WriteLine($"==========Invalid Input==========\n{e}");
-            //     continue;
-            // }
-
-            //     Console.WriteLine($"File is found by FileExists?: {File.Exists(files[option])}");
-            //     Console.WriteLine($"{files[option]} selected");
-            //     flag=false;
-
-            Console.ReadLine();
-        }while (flag);
+        return files;
 
     }
     public static Document CreateDocument()
