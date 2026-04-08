@@ -170,6 +170,16 @@ for (int y = 0; y < csvFull.GetLength(0); y++)
         // LevenshteinDistance.Compute(new string(IMAGE_PATH+csvFull[y,columnOptions[0]]+csvFull[y,columnOptions[1]]),"")
         //The values go in and consume said Levenshtein method, and then stores the results in an array, then we pick the 
         // one with the highest score and choose that to put into the record's field, if we don't find shit then we return null or something i dunno
+        //This method gives us in base to 1, how siimilar are the two values,1 being identical
+        // static double Similarity(string s, string t)
+        // {
+        //     int distance = LevenshteinDistance.Compute(s, t);
+        //     int maxLength = Math.Max(s.Length, t.Length);
+            
+        //     if (maxLength == 0) return 1.0; // both empty
+
+        //     return 1.0 - (double)distance / maxLength;
+        // }
     ));
 }//add iteration on folder and iteration on csv readout
 
