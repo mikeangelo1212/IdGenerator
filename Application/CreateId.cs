@@ -47,9 +47,10 @@ public static class CreateId
         }
         for (int i = 0; i < files.Count; i++)
         {
-            string padding= i%2==0?"\n":"   ";
+            string padding= (i+1)%2==0?"\n":"   ";
             Console.Write($"{files[i]}{padding}");
         }
+        Console.WriteLine("");//extra line for formatting
 
         return files;
 

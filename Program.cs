@@ -12,6 +12,7 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Timers;
+using Application.Records;
 
 // CreateId.Initialize();
 
@@ -26,43 +27,140 @@ const string IMAGE_PATH="src/img";
 
 Console.WriteLine(Directory.Exists(CSV_PATH));
 Console.WriteLine(Directory.Exists(IMAGE_PATH));
+
 List<string>? imagesUrl= CreateId.SearchImages(IMAGE_PATH);
 
 if(imagesUrl is null)
 {
     Console.WriteLine("==========Image path non existent==========");
-    Console.ReadKey();
+    Console.ReadLine();
+    Environment.Exit(0);
+}
+string? csvUrl=CsvHandler.ListFiles("src/csv");
+
+if(csvUrl is null){
+    Console.WriteLine("==========CSV path non existent==========");
+    Console.ReadLine();
     Environment.Exit(0);
 }
 
-// string[,] csvFull=CsvHandler.LoadCsv(CsvHandler.ListFiles("src/csv"));
+string[,] csvFull=CsvHandler.LoadCsv(csvUrl);
 
 // Console.WriteLine(csvFull.Length);
-//el arreglo es [y,x]   [0,0],[0,1],[0,2],[0,3],[0,2],
+// el arreglo es [y,x]   [0,0],[0,1],[0,2],[0,3],[0,2],
 //                      [1,0],[1,1],[1,2],[1,3],[1,4]
 // GetLength(1, son las columnas)
 // GetLength(0, son las filas)
 
-// bool flag=true;
-// int option;
-// do
-// {
-//     Console.WriteLine("==========CSV Columns==========\n");
-//     for (int i = 0; i < csvFull.GetLength(1); i++)
-//     {
-//         Console.WriteLine($"Column <{i}>: {csvFull[0,i]}");
-//     }
-//     try
-//     {
-//         Console.WriteLine("==========Select a column==========");
-//         option = Convert.ToInt32(Console.ReadLine());
-//     }
-//     catch (Exception e)
-//     {
-//         Console.WriteLine($"==========Invalid Input==========\n{e}");
-//         continue;
-//     }
-//     flag=false;
-// }while (flag);
+int csvOption;
+
+
+
+
+        Console.WriteLine(
+@"============================================================================
+This template has three fields to fill, the csv must have at least two columns
+(Full name and Role/Position) in order to work.
+1.-Full name
+2.-Role/Position
+3.-Employee image
+If the image url is not provided in the CSV. The program will look for the image file 
+in the src/img folder which name isclosest to the full name and provide such image in the template
+Please select the columns you want to use to fill these required fields.");
+
+
+string[] templateFields=["Full name","Role/Position","Employee Image"];
+List<int> columnOptions=new List<int>();
+do
+{
+    if (columnOptions.Count >= 2&&!(columnOptions.Count==3))
+    {       
+        char charOption;
+        
+        do
+        {
+            Console.WriteLine("==========Do you have a csv column with image names?==========\n[y/N]?: ");
+            try
+            {   
+                charOption = Console.ReadLine()![0];
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"==========Invalid Input==========\n{e}");
+                continue;
+            }
+            if (charOption == 'y' || charOption == 'Y')
+            {
+                Console.WriteLine("Fuck yes");
+                break;
+            }
+            else if (charOption == 'n' || charOption == 'N')
+            {
+                columnOptions.Add(-1);
+            }
+            
+        }while(columnOptions.Count<=2);
+        
+    }
+    try
+    {
+        if (columnOptions.Count >= templateFields.Length)
+        {
+            break;
+        }
+        else
+        {
+            Console.WriteLine("==========CSV Columns==========\n");
+            for (int i = 0; i < csvFull.GetLength(1); i++)
+            {   
+                string padding= (i+1)%3==0?"\n":"   ";
+                Console.Write($"Column <{i}>: {csvFull[0,i]}{padding}");
+            }
+            Console.WriteLine($"==========Select a column for: {templateFields[columnOptions.Count]}==========");
+            Console.WriteLine("");//extra line for formatting
+            csvOption = Math.Abs(Convert.ToInt32(Console.ReadLine()));//Math.Abs to always have a positive
+            
+        }
+        
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine($"==========Invalid Input==========\n{e}");
+        continue;
+    }
+    if (csvOption >= csvFull.GetLength(1))
+    {
+        Console.WriteLine("==========Out of range input==========");
+    }
+    else
+    {
+        columnOptions.Add(csvOption);    
+    }
+    
+    Console.WriteLine($"Length of options now:  {columnOptions.Count}");
+
+
+}while (true);
+
+if (columnOptions.Contains(-1))
+{
+    columnOptions.Remove(-1);
+    Console.WriteLine("buscamos en folder");
+}
+else
+{
+    Console.WriteLine("columna con archivo");
+}
+List<FullOption> _fullOptions=[];
+
+for (int i = 0; i < columnOptions.Count; i++)
+{
+    _fullOptions.Add(new FullOption(1,""));
+}//add iteration on folder and iteration on csv readout
+
+
+Console.WriteLine("SE cayo el sistema");
+Console.WriteLine(columnOptions);
+Console.ReadLine();
 
 

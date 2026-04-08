@@ -9,9 +9,13 @@ namespace Application;
 
 public static class CsvHandler
 {
-    public static string ListFiles(string path)
+    public static string? ListFiles(string path)
     {
         string [] files= Directory.GetFiles(path);
+        if(files is null)
+        {
+            return null;
+        }
         bool flag = true;
         int option=0;
         
