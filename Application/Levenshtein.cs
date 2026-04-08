@@ -2,6 +2,7 @@ namespace Application;
 /// <summary>
 /// Contains approximate string matching
 /// </summary>
+/// https://stackoverflow.com/questions/13793560/find-closest-match-to-input-string-in-a-list-of-strings
 public static class LevenshteinDistance
 {
     /// <summary>

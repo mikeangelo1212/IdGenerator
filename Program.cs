@@ -144,20 +144,39 @@ do
 
 if (columnOptions.Contains(-1))
 {
-    columnOptions.Remove(-1);
     Console.WriteLine("buscamos en folder");
 }
 else
 {
     Console.WriteLine("columna con archivo");
 }
-List<FullOption> _fullOptions=[];
+List<TemplateInfo> _templateInfo=[];
 
-for (int i = 0; i < columnOptions.Count; i++)
+for (int y = 0; y < csvFull.GetLength(0); y++)
 {
-    _fullOptions.Add(new FullOption(1,""));
+    _templateInfo.Add(new TemplateInfo(
+        new string(IMAGE_PATH+csvFull[y,columnOptions[0]]+csvFull[y,columnOptions[1]]);
+        csvFull[y,columnOptions[0]],
+        csvFull[y,columnOptions[1]],
+        columnOptions[2]==-1?
+            LevenshteinDistance.Compute(new string(IMAGE_PATH+csvFull[y,columnOptions[0]]+csvFull[y,columnOptions[1]]),"")
+            :
+            csvFull[y,columnOptions[2]]
+        //if we have -1, it means we searching the folder for images close to the name
+        //we are gonna search for an image url with no spaces, trimmed. And compare that
+        //trim(folderURL+firstname+lastname) and compare it with the contents of imagesUrl
+
+        //So we are gonna ask this shit, throughout the whole array in a custom function that receives two parameters
+        // LevenshteinDistance.Compute(new string(IMAGE_PATH+csvFull[y,columnOptions[0]]+csvFull[y,columnOptions[1]]),"")
+        //The values go in and consume said Levenshtein method, and then stores the results in an array, then we pick the 
+        // one with the highest score and choose that to put into the record's field, if we don't find shit then we return null or something i dunno
+    ));
 }//add iteration on folder and iteration on csv readout
 
+foreach (var item in _templateInfo)
+{
+    System.Console.WriteLine(item.FullName);
+}
 
 Console.WriteLine("SE cayo el sistema");
 Console.WriteLine(columnOptions);
