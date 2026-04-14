@@ -14,14 +14,6 @@ using System.Collections;
 using System.Timers;
 using Application.Records;
 
-// CreateId.Initialize();
-
-// QuestPDF.Fluent.Document document = CreateId.CreateDocument();
-
-// document.GeneratgitePdf("hello.pdf");
-
-// document.ShowInCompanion(12500);
-
 const string CSV_PATH="src/csv";
 const string IMAGE_PATH="src/img";
 
@@ -154,14 +146,15 @@ List<TemplateInfo> _templateInfo=[];
 
 for (int y = 0; y < csvFull.GetLength(0); y++)
 {
+
     _templateInfo.Add(new TemplateInfo(
-        new string(IMAGE_PATH+csvFull[y,columnOptions[0]]+csvFull[y,columnOptions[1]]);
         csvFull[y,columnOptions[0]],
         csvFull[y,columnOptions[1]],
         columnOptions[2]==-1?
-            LevenshteinDistance.Compute(new string(IMAGE_PATH+csvFull[y,columnOptions[0]]+csvFull[y,columnOptions[1]]),"")
+            Levenshtein.findMostAlike(new string(IMAGE_PATH+csvFull[y,columnOptions[0]].Trim())+".jpg",imagesUrl)
             :
             csvFull[y,columnOptions[2]]
+    ));
         //if we have -1, it means we searching the folder for images close to the name
         //we are gonna search for an image url with no spaces, trimmed. And compare that
         //trim(folderURL+firstname+lastname) and compare it with the contents of imagesUrl
@@ -180,16 +173,23 @@ for (int y = 0; y < csvFull.GetLength(0); y++)
 
         //     return 1.0 - (double)distance / maxLength;
         // }
-    ));
 }//add iteration on folder and iteration on csv readout
+
+CreateId.Initialize();
+
+QuestPDF.Fluent.Document document = CreateId.CreateDocument(_templateInfo);
+
+document.GeneratePdf("hello.pdf");
+
+// document.ShowInCompanion(12500);
 
 foreach (var item in _templateInfo)
 {
-    System.Console.WriteLine(item.FullName);
+    Console.WriteLine($"[{item.FullName}][{item.Role}][{item.ImgURL}]");
 }
 
+
 Console.WriteLine("SE cayo el sistema");
-Console.WriteLine(columnOptions);
 Console.ReadLine();
 
 

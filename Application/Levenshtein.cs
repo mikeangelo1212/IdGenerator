@@ -3,7 +3,7 @@ namespace Application;
 /// Contains approximate string matching
 /// </summary>
 /// https://stackoverflow.com/questions/13793560/find-closest-match-to-input-string-in-a-list-of-strings
-public static class LevenshteinDistance
+public static class Levenshtein
 {
     /// <summary>
     /// Compute the distance between two strings.
@@ -52,4 +52,28 @@ public static class LevenshteinDistance
     // Step 7
     return d[n, m];
     }
+
+    public static string findMostAlike(string txt1,List<string> imgsURLLocal)
+    {
+        double mostAlikeValue=0.0;
+        string mostAlikeURL="";
+        foreach (string imageURL in imgsURLLocal)
+        {
+            int distance = Levenshtein.Compute(txt1, imageURL);
+            int maxLength = Math.Max(txt1.Length, imageURL.Length);
+
+            if (maxLength == 0){
+                continue;
+            } // both empty
+
+            if ((1.0 - (double)distance / maxLength) > mostAlikeValue)
+            {
+            mostAlikeValue= 1.0 - (double)distance / maxLength;
+            mostAlikeURL=imageURL;
+            }
+        }
+        return mostAlikeURL;
+        
+        
+    } 
 }

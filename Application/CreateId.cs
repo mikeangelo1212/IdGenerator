@@ -1,3 +1,4 @@
+using Application.Records;
 using QuestPDF.Companion;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
@@ -55,15 +56,59 @@ public static class CreateId
         return files;
 
     }
-    public static Document CreateDocument()
+    public static Document CreateDocument(List<TemplateInfo> _templateInfo)
     {
         return Document.Create(container =>
         {   
             PageSize _pageSize=new PageSize(5.5f, 8.5f, Unit.Centimetre);
             
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < _templateInfo.Count; i++)
             {
-                
+                 container.Page(page =>
+                {   
+                    page.Size(_pageSize);
+                    page.PageColor(Colors.White);
+                    page.DefaultTextStyle(x => x.FontSize(20));
+                    
+                    page.Content()
+                        .Width(_pageSize.Width)
+                        .Height(_pageSize.Height)
+                        .Padding(0)
+                        .Layers(x =>
+                        {
+                            x.Layer().Image("src/img/plantilla.png").FitUnproportionally();
+                            x.PrimaryLayer().Column(column =>
+                            {
+                                column.Item().Height(_pageSize.Height/6);
+                                column.Item()
+                                    .Height(_pageSize.Height/2)
+                                    .ExtendHorizontal()
+                                    .AlignMiddle()
+                                    .AlignCenter()
+                                    .Image(_templateInfo.ElementAt(i).ImgURL).FitArea();
+                                column.Item()
+                                .Shadow(new BoxShadowStyle
+                                {
+                                    Color = Colors.White,
+                                    Blur = 12,
+                                    Spread = 6
+                                })
+                                .Column(y =>
+                                {
+                                    y.Item()
+                                        .ExtendHorizontal()
+                                        .Text(_templateInfo.ElementAt(i).FullName).Bold()
+                                        .AlignCenter()
+                                        .FontSize(18);
+                                    y.Item()
+                                        .ExtendHorizontal()
+                                        .Text(_templateInfo.ElementAt(i).Role)
+                                        .AlignCenter()
+                                        .FontSize(12);
+                                });
+                            });
+                        });      
+                });
             }
             
             container.Page(page =>
@@ -78,7 +123,7 @@ public static class CreateId
                     .Padding(0)
                     .Layers(x =>
                     {   
-                        x.Layer().Image("../src/img/plantilla.png").FitUnproportionally();
+                        x.Layer().Image("src/img/plantilla.png").FitUnproportionally();
                         x.PrimaryLayer().Column(column =>
                         {
                             column.Item().Height(_pageSize.Height/6);
